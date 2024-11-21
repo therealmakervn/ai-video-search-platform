@@ -1,0 +1,283 @@
+# Hướng Dẫn Tích Hợp Twelve Labs
+
+## Giới thiệu về Twelve Labs
+
+Twelve Labs là một nền tảng hiểu video sử dụng trí tuệ nhân tạo để trích xuất thông tin từ video. Nền tảng này cung cấp các khả năng phân tích và tìm kiếm video như chuyển động, hành động, đối tượng, con người, âm thanh, văn bản trên màn hình và lời nói. Twelve Labs giúp bạn tích hợp khả năng hiểu video phong phú và ngữ cảnh vào ứng dụng của mình thông qua các API dễ sử dụng.
+
+## Các Tính Năng Chính
+
+1. **Tìm kiếm ngữ nghĩa sâu**  
+   Tìm kiếm chính xác khoảnh khắc bạn cần trong video bằng cách sử dụng truy vấn ngôn ngữ tự nhiên thay vì thẻ hoặc siêu dữ liệu.
+
+2. **Phân loại không cần huấn luyện**  
+   Sử dụng ngôn ngữ tự nhiên để tạo phân loại tùy chỉnh, giúp phân loại video một cách chính xác và hiệu quả phù hợp với các yêu cầu cụ thể của bạn.
+
+3. **Tạo văn bản từ video động**  
+   Tóm tắt hoặc tạo báo cáo tùy chỉnh từ video. Nền tảng này cung cấp các định dạng tích hợp để tạo tiêu đề, chủ đề, tóm tắt, thẻ, chương và điểm nổi bật.
+
+4. **Tích hợp trực quan**  
+   Nhúng mô hình nền tảng đa phương thức tiên tiến của Twelve Labs vào ứng dụng của bạn chỉ với một vài cuộc gọi API.
+
+5. **Lấy kết quả nhanh chóng**  
+   Nhận kết quả trong vòng vài giây với hệ thống hiệu quả và có thể mở rộng.
+
+6. **Khả năng mở rộng**  
+   Hạ tầng phân tán gốc đám mây xử lý liền mạch hàng nghìn yêu cầu đồng thời.
+
+## Cách Tích Hợp với Dự Án Của Bạn
+
+Để tích hợp Twelve Labs vào dự án của bạn, bạn có thể sử dụng các SDK có sẵn cho Python và Node.js. Các SDK này cung cấp giao diện mạnh mẽ để tương tác với Nền tảng Hiểu Video của Twelve Labs, giúp bạn thực hiện các tác vụ bất đồng bộ một cách dễ dàng.
+
+### Các Bước Cơ Bản
+
+1. **Cài đặt SDK**
+   - Để sử dụng API của Twelve Labs, bạn cần cài đặt SDK. Dưới đây là các bước cài đặt cho Python và Node.js:
+
+   - **Python:**
+     ```bash
+     pip install twelvelabs
+     ```
+
+   - **Node.js:**
+     ```bash
+     npm install twelvelabs
+     ```
+
+2. **Cấu hình API Key**
+   - Để xác thực và sử dụng các API của Twelve Labs, bạn cần một API key. Đăng ký và lấy API key tại trang chủ Twelve Labs.
+   
+   Sau khi lấy được API key, bạn có thể cấu hình nó trong mã nguồn của mình.
+
+3. **Sử dụng API**
+
+   ### Python Example:
+
+   Dưới đây là một ví dụ chi tiết về cách sử dụng API của Twelve Labs trong Python để phân tích một video:
+
+   ```python
+   import twelvelabs
+   import json
+
+   # Khởi tạo API với khóa API của bạn
+   api = twelvelabs.API(api_key='your_api_key')
+
+   # Phân tích video
+   video_path = 'path_to_video.mp4'
+   try:
+       response = api.analyze_video(video_path)
+       # In kết quả trả về từ API
+       print(json.dumps(response, indent=4))
+   except Exception as e:
+       print(f"Error analyzing video: {e}")
+
+Trong đó:
+
+analyze_video(video_path) là phương thức gọi API để phân tích video.
+Kết quả trả về là một đối tượng JSON chứa thông tin chi tiết về video, bao gồm các đối tượng, hành động, chuyển động, v.v.
+Node.js Example:
+Đối với Node.js, dưới đây là một ví dụ tương tự:
+
+javascript
+Sao chép mã
+const twelvelabs = require('twelvelabs');
+const fs = require('fs');
+
+// Khởi tạo API với khóa API của bạn
+const api = new twelvelabs.API({ apiKey: 'your_api_key' });
+
+// Phân tích video
+const videoPath = 'path_to_video.mp4';
+api.analyzeVideo(videoPath)
+  .then(response => {
+    // In kết quả trả về từ API
+    console.log(JSON.stringify(response, null, 2));
+  })
+  .catch(error => {
+    console.error("Error analyzing video:", error);
+  });
+Cả hai ví dụ trên đều thực hiện phân tích video và trả về kết quả dưới dạng JSON. Bạn có thể xử lý kết quả này theo nhu cầu của mình, ví dụ như hiển thị thông tin về các đối tượng trong video, hành động hoặc các yếu tố khác.
+
+Tích hợp kết quả vào ứng dụng của bạn
+
+Sau khi nhận được kết quả phân tích từ API, bạn có thể tích hợp vào các tính năng như tìm kiếm video theo ngữ nghĩa, tạo báo cáo từ video, hoặc sử dụng các thông tin trích xuất được từ video để cải thiện ứng dụng của bạn.
+Lấy Kết Quả Trong Thời Gian Thực
+
+Twelve Labs cung cấp khả năng trả kết quả phân tích video chỉ trong vài giây. Điều này giúp bạn tích hợp và phản hồi dữ liệu trong thời gian thực cho người dùng cuối.
+Tài Liệu và Hướng Dẫn
+Để biết thêm chi tiết về các API và tính năng của Twelve Labs, bạn có thể tham khảo tài liệu chính thức tại:
+Twelve Labs Documentation
+
+Chú ý: Bạn cần có khóa API từ Twelve Labs để sử dụng các tính năng của nền tảng. Để lấy khóa API, hãy đăng ký tại trang web chính thức của Twelve Labs.
+
+css
+Sao chép mã
+
+Lưu ý rằng file này chứa hướng dẫn chi tiết về cách cài đặt và sử dụng API của Twelve Labs cho các dự án. Các ví dụ cụ thể giúp người dùng hiểu rõ hơn về cách triển khai và sử dụng nền tảng của Twelve Labs.
+Typical workflows
+This page provides an overview of common workflows for using the Twelve Labs JavaScript SDK. Each workflow consists of a series of steps, with links to detailed documentation for each step.
+
+All workflows involving uploading video content to the platform require asynchronous processing. You must wait for the video processing to complete before proceeding with the subsequent steps.
+
+Prerequisites
+Ensure that the following prerequisites are met before using the JavaScript SDK:
+
+Node.js 14 or newer must be installed on your machine.
+You have an API key. If you don't have an account, please sign up for a free account. Then, to retrieve your API key, go to the API Key page, and select the Copy icon to the right of the key to copy it to your clipboard.
+Install the SDK
+Install the twelvelabs-js package:
+
+Shell
+
+yarn add twelvelabs-js # or npm i twelvelabs-js
+Initialize the SDK
+Import the required packages:
+JavaScript
+
+import { TwelveLabs } from 'twelvelabs-js';
+Instantiate the SDK client with your API key.:
+JavaScript
+
+const client = new TwelveLabs({ apiKey: '<YOUR_API_KEY>' });
+Search
+Follow the steps in this section to search through your video content and find specific moments, scenes, or information.
+
+Steps:
+
+Create an index, enabling the Marengo video understanding engine.
+Upload videos and monitor the processing.
+Perform a search request, using text or images as queries.
+Notes:
+
+The search scope is an individual index.
+Results support pagination, filtering, sorting, and grouping.
+Classify
+Follow the steps in this section to organize your videos into manageable and useful categories, making them easier to find, access, and use.
+
+Steps:
+
+Create an index, enabling the Marengo video understanding engine.
+Upload videos and monitor the processing.
+Classify a set of videos or all the videos within an index.
+Notes:
+
+Results support filtering and pagination.
+Create text embeddings
+This workflow guides you through creating embeddings for text.
+
+Steps:
+
+Create text embeddings
+Notes:
+
+Creating text embeddings is a synchronous process.
+Create video embeddings
+This workflow guides you through creating embeddings for videos..
+
+Steps:
+
+Upload a video and monitor the processing.
+Retrieve the embeddings.
+Generate text from videos
+Follow the steps in this section to generate texts based on your videos.
+
+Steps:
+
+Create an index, enabling the Pegasus video understanding engine.
+Upload videos and monitor the processing.
+Depending on your use case, generate one of the following:
+Titles, topics, and hashtags
+Summaries, chapters, and highlights
+Open-ended texts.
+Note:
+
+When generating open-ended texts, the platform supports streaming responses.
+Extract video data
+Follow the steps in this guide to extract various types of data from your videos, such as transcriptions, on-screen text, logos, and thumbnails.
+
+Steps:
+
+Create an index, enabling the Marengo video understanding engine.
+Upload videos and monitor the processing.
+Depending on your use case:
+Extract transcriptions
+Extract text recognized in a video
+Extract logos
+Extract thumbnails
+
+
+
+##
+The TwelveLabs class
+The TwelveLabs class is the main entry point for the SDK. It initializes the client and provides access to all the resources.
+
+Properties
+Name	Type	Description
+engine	Resources.Engine	Use this object to manage video understanding engines.
+index	Resources.Index	Use this object to manage your indexes.
+task	Resources.Task	Use this object to upload videos and manage them.
+search	Resources.Search	Use this object to perform search requests.
+classify	Resources.Classify	Use this object to classify videos.
+generate	Resources.Generate	Use this object to generate text from videos.
+embed	Resources.Embed	Use this object to create embeddings.
+Methods
+The constructor
+Description: The constructor creates a new instance of the TwelveLabs class.
+
+Function signature and example:
+
+Function signature
+Node.js example
+
+constructor({ apiKey, version = DEFAULT_API_VERSION }: ClientOptions) 
+Parameters:
+
+Name	Type	Required	Description
+apiKey	string	Yes	Your Twelve Labs API key.
+version	string	No	The API version to use. Defaults to the latest version.
+Return value: Implicitly returns the newly created instance.
+
+##
+
+Introduction
+Use the Twelve Labs Video Understanding API to extract information from your videos and make it available to your applications. The API is organized around REST and returns responses in JSON format. It is compatible with most programming languages, and you can use one of the available SDKs, Postman, or other REST clients to interact with the API.
+
+Call an endpoint
+To call an endpoint, you must construct a URL similar to the following one:
+
+{Method} {BaseURL}/{version}/{resource}/{path_parameters}?{query_parameters}
+
+The list below describes each component of a request:
+
+Method: The API supports the following methods:
+GET: Reads data.
+POST: Creates a new object or performs an action.
+PUT: Updates an object.
+DELETE: Deletes an object.
+Note that the POST and PUT methods require you to pass a request body containing additional parameters.
+Base URL: The base URL of the API is https://api.twelvelabs.io.
+Version: To use this version of the API, it must be set to v1.2.
+Resource: The name of the resource you want to interact with.
+Path Parameters: Allow you to indicate a specific object. For example, you can retrieve details about an engine or index.
+Query Parameters: Any parameters that an endpoint accepts. For example, you can filter or sort a response using query parameters.
+Note that the API requires you to pass a header parameter containing your API key to authenticate each request. For details, see the Authentication page.
+
+Responses
+Twelve Labs Video Understanding API follows the RFC 9110 standard to indicate the success or failure of a request. Each response contains a field named X-Api-Version that indicates the version of the API against which the operation was performed.
+
+HTTP status codes
+The following list is a summary of the HTTP status codes returned by the API:
+
+200: The request was successful.
+201: The request was successful and a new resource was created.
+400: The API service cannot process the request. See the code and message fields in the response for more details about the error.
+401: The API key you provided is not valid. Note that, for security reasons, your API key automatically expires every two months. When your key has expired, you must generate a new one to continue using the API. For details, see the Authentication page.
+404: The requested resource was not found.
+429: Indicates that a rate limit has been reached.
+Errors
+HTTP status codes in the 4xx range indicate an error caused by the parameters you provided in the request. For each error, the API service returns the following fields in the body of the response:
+
+code: A string representing the error code.
+message: A human-readable string describing the error, intended to be suitable for display in a user interface.
+(Optional) docs_url: The URL of the relevant documentation page.
+For more details, see the Error codes page.
+
