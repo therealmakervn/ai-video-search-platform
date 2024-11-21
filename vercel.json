@@ -7,10 +7,7 @@
     { "src": "/(.*)", "dest": "/" }
   ],
   "env": {
-    "TWELVE_LABS_API_KEY": "@twelve_labs_api_key",
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "NEXT_PUBLIC_TWELVE_LABS_VIDEO_INDEX_ID": "@twelve_labs_video_index_id"
+    "TWELVE_LABS_API_KEY": "@twelve_labs_api_key"
   },
   "regions": ["sin1"],
   "framework": "nextjs"
